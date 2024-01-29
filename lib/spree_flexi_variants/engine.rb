@@ -40,6 +40,7 @@ module SpreeFlexiVariants
         'spree/frontend/spree_flexi_variants_exclusions.js',
         'spree/backend/orders/flexi_configuration.js',
         'spree/frontend/products/core.js',
+        'spree/frontend/products/update_price.js',
         'spree/frontend/products/customizations.js'
       ] # ,'spree/frontend/spree-flexi-variants.*' # removed for now until we need the styles
     end
