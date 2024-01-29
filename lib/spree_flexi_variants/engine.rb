@@ -11,13 +11,7 @@ module SpreeFlexiVariants
       g.test_framework :rspec
     end
 
-    def self.activate
-      Dir.glob(File.join(File.dirname(__FILE__), "../../app/**/*_decorator*.rb")) do |c|
-        Rails.configuration.cache_classes ? require(c) : load(c)
-      end
 
-      Spree::Core::Environment::Calculators.class_eval do
-        attr_accessor :product_customization_types
     config.after_initialize do |app|
       unless app.config.spree.calculators.respond_to?(:product_customization_types)
         app.config.spree.calculators = SpreeCalculators.new(
@@ -41,6 +35,10 @@ module SpreeFlexiVariants
 
     initializer "spree.flexi_variants.preferences", after: "spree.environment" do |app|
       SpreeFlexiVariants::Config = Spree::FlexiVariantsConfiguration.new
+    def self.activate
+      Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
+        Rails.configuration.cache_classes ? require(c) : load(c)
+      end
     end
 
     initializer "spree.flexi_variants.assets.precompile" do |app|
