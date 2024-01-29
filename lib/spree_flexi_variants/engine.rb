@@ -11,6 +11,9 @@ module SpreeFlexiVariants
       g.test_framework :rspec
     end
 
+    initializer 'spree_flexi_variants.environment', before: :load_config_initializers do |_app|
+      SpreeFlexiVariants::Config = SpreeFlexiVariants::Configuration.new
+    end
 
     config.after_initialize do |app|
       unless app.config.spree.calculators.respond_to?(:product_customization_types)
@@ -33,8 +36,6 @@ module SpreeFlexiVariants
 
     config.to_prepare &method(:activate).to_proc
 
-    initializer "spree.flexi_variants.preferences", after: "spree.environment" do |app|
-      SpreeFlexiVariants::Config = Spree::FlexiVariantsConfiguration.new
     def self.activate
       Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
