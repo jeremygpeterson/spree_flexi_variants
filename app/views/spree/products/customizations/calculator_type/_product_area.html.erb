@@ -6,19 +6,27 @@
 
 <%= content_for :flexi_variants_body_js do %>
   <%= javascript_tag do %>
+    SpreeFlexiVariants.jobs.add(() =>
+      $(document).on("keyup", "#<%= width_dom_id %>", product_area_keyup),
+    );
+
+    SpreeFlexiVariants.jobs.add(() =>
+      $(document).on("keyup", "#<%= height_dom_id %>", product_area_keyup),
+    );
+
     function product_area_keyup() {
       var text_field = $(this);
 
-      delay(function(){
-
+      delay(function () {
         // update the hidden price field for this file input
-        $(text_field).parent().parent().find(".customization_price").val(calculate_product_area_price(text_field));
-        updatePrice();
-      }, 1000 ); // delay
-    }; // keyup
-
-    $(document).on('keyup', '#<%= width_dom_id %>', product_area_keyup);
-    $(document).on('keyup', '#<%= height_dom_id %>', product_area_keyup);
+        $(text_field)
+          .parent()
+          .parent()
+          .find(".customization_price")
+          .val(calculate_product_area_price(text_field));
+        SpreeFlexiVariants.product.updatePrice();
+      }, 1000); // delay
+    } // keyup
   <% end %>
 <% end %>
 

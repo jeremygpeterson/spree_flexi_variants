@@ -2,6 +2,8 @@
   <%# for finding optional partials %>
   <% lookup = ActionView::LookupContext.new(ActionController::Base.view_paths, {formats: [:html]}) %>
 
+  <%= javascript_include_tag 'spree/frontend/products/core' %>
+
   <div id="product-customizations">
     <div class= 'col-sm-12'>
       <h3 class="product-section-title"><%=Spree.t(:customizations) %></h3>
@@ -43,4 +45,6 @@
       <% end %> <%# each product_customization_grouped_by_calc_type %>
     </ul>
   </div> <!-- product-customizations -->
+
+  <%= javascript_include_tag 'spree/frontend/products/customizations', :defer => "defer" %>
 <% end %>
