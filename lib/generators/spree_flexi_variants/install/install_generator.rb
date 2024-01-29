@@ -4,7 +4,9 @@ module SpreeFlexiVariants
       class_option :migrate, type: :boolean, default: false, banner: 'Run SpreeFlexiVariants migrations'
 
       def add_javascripts
-        append_file 'vendor/assets/javascripts/spree/frontend/all.js', "//= require spree/frontend/spree_flexi_variants\n"
+        if ::Spree::Core::Engine.frontend_available?
+          append_file 'vendor/assets/javascripts/spree/frontend/all.js', "//= require spree/frontend/spree_flexi_variants\n"
+        end
         append_file 'vendor/assets/javascripts/spree/backend/all.js', "//= require spree/backend/spree_flexi_variants\n"
       end
 
