@@ -1,0 +1,24 @@
+<%= render partial: "spree/admin/variants/autocomplete", formats: :js %>
+<%= render partial: "spree/admin/variants/autocomplete_stock", formats: :js %>
+
+<div class="card mb-3" id="add-line-item" data-hook>
+  <div class="card-header">
+    <h5 class="card-title mb-0 h6">
+      <%= Spree.t(:add_product) %>
+    </h5>
+  </div>
+  <div class="card-body">
+    <div data-hook="add_product_name">
+      <%= label_tag :add_variant_id, Spree.t(:name_or_sku) %>
+      <%= select_tag 'variants', nil, id: :add_variant_id, class: 'variant_autocomplete d-block w-100' %>
+    </div>
+
+    <%# Start: Spree Flexi Variant %>
+
+    <div id="configurations" style="float: left; width:55%;margin-right:5%; margin-top: 30px; margin-left: 10%;"></div>
+
+    <%# End: Spree Flexi Variant %>
+
+    <div id="stock_details"></div>
+  </div>
+</div>
