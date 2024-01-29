@@ -43,6 +43,8 @@ module SpreeFlexiVariants
 
     initializer "spree.flexi_variants.assets.precompile" do |app|
         app.config.assets.precompile += ['spree/frontend/spree_flexi_variants_exclusions.js','spree/backend/orders/flexi_configuration.js'] # ,'spree/frontend/spree-flexi-variants.*' # removed for now until we need the styles
+    end
+
     def self.frontend_available?
       @@frontend_available ||= ::Rails::Engine.subclasses.map(&:instance).map { |e| e.class.to_s }.include?('Spree::Frontend::Engine')
     end
@@ -50,3 +52,4 @@ module SpreeFlexiVariants
     config.to_prepare(&method(:activate).to_proc)
   end
 end
+
