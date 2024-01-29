@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'xray-rails'
   s.add_development_dependency 'quiet_assets'
   s.add_development_dependency 'jazz_fingers'
+  s.add_dependency 'spree_backend', spree_version, '< 4.7'
   s.add_dependency 'spree_extension'
 
   s.add_development_dependency 'spree_dev_tools'
