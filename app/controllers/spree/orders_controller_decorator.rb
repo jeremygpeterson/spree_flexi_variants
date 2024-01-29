@@ -1,5 +1,6 @@
 module Spree
-  OrdersController.class_eval do
+  if Spree::Core::Engine.frontend_available?
+    OrdersController.class_eval do
       include ProductCustomizations
       include AdHocUtils
 
@@ -12,7 +13,7 @@ module Spree
         params[:options][:ad_hoc_option_values] = ad_hoc_option_value_ids
         params[:options][:product_customizations] = product_customizations
         params[:options][:customization_price] = params[:customization_price] if params[:customization_price]
+      end
     end
-
   end
 end

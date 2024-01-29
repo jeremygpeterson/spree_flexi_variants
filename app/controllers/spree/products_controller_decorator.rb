@@ -1,5 +1,6 @@
 module Spree
-  ProductsController.class_eval do
+  if Spree::Core::Engine.frontend_available?
+    ProductsController.class_eval do
       def customize
         # copied verbatim from 0.60 ProductsController#show, except that I changed id to product_id on following line
         # TODO: is there another way?  e.g. render action: "show", template: "customize" ?
@@ -26,6 +27,7 @@ module Spree
         @taxon = Taxon.find_by_permalink(::Regexp.last_match(1)) if referer && referer.match(%r{^https?://[^/]+/t/([a-z0-9\-/]+)$})
 
         respond_with(@product)
+      end
     end
   end
 end
