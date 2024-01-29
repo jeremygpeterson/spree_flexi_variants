@@ -1,6 +1,7 @@
-require 'spree_core'
 require 'carrierwave'
+require 'spree_core'
 require 'spree_backend'
+require 'spree_extension'
 require 'spree_flexi_variants/engine'
 require 'spree_flexi_variants/version'
 require 'spree_flexi_variants/configuration'
