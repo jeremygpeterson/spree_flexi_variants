@@ -1,8 +1,9 @@
 module SpreeFlexiVariants
   class Engine < Rails::Engine
+    require 'spree/core'
+    isolate_namespace Spree
     engine_name 'spree_flexi_variants'
 
-    config.autoload_paths += %W(#{config.root}/lib)
     SpreeCalculators = Struct.new(:shipping_methods, :tax_rates, :promotion_actions_create_adjustments,
                                   :promotion_actions_create_item_adjustments, :product_customization_types)
 
@@ -33,7 +34,6 @@ module SpreeFlexiVariants
         Spree::Calculator::NoCharge
       ]
     end
-
 
     def self.activate
       Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
