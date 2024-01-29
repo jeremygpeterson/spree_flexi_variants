@@ -16,7 +16,6 @@ Gem::Specification.new do |s|
   s.author    = 'Collins Lagat'
   s.email     = 'collins@collinslagat.com'
   s.homepage  = 'https://github.com/collins-lagat/spree_flexi_variants'
-  s.license = 'BSD-3-Clause'
 
   s.files = `git ls-files`.split("\n").reject { |f| f.match(/^spec/) && !f.match(%r{^spec/fixtures}) }
   s.require_path = 'lib'
