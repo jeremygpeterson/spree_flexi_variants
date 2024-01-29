@@ -1,3 +1,6 @@
+lib = File.expand_path('lib', __dir__)
+$LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
+
 require 'spree_flexi_variants/version'
 
 Gem::Specification.new do |s|
@@ -6,15 +9,16 @@ Gem::Specification.new do |s|
   s.version     = SpreeFlexiVariants.version
   s.summary     = 'This is a spree extension that solves two use cases related to variants.'
   s.description = 'Spree extension to create product variants as-needed'
-  s.required_ruby_version = '>= 2.0.0'
+  s.required_ruby_version = '>= 2.5'
 
-  # s.original_author            = 'Jeff Squires'
-  s.author            = 'Quintin Adam'
-  s.email             = 'quintinjadam@gmail.com'
-  s.homepage          = 'https://github.com/QuintinAdam/spree_flexi_variants'
+  # s.original_author   = 'Jeff Squires'
+  # s.second_author     = 'Quintin Adam'
+  s.author    = 'Collins Lagat'
+  s.email     = 'collins@collinslagat.com'
+  s.homepage  = 'https://github.com/collins-lagat/spree_flexi_variants'
+  s.license = 'BSD-3-Clause'
 
-  s.files       = `git ls-files`.split("\n")
-  s.test_files  = `git ls-files -- {spec}/*`.split("\n")
+  s.files = `git ls-files`.split("\n").reject { |f| f.match(/^spec/) && !f.match(%r{^spec/fixtures}) }
   s.require_path = 'lib'
   s.requirements << 'none'
 
@@ -43,5 +47,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'xray-rails'
   s.add_development_dependency 'quiet_assets'
   s.add_development_dependency 'jazz_fingers'
+  s.add_dependency 'spree_extension'
 
+  s.add_development_dependency 'spree_dev_tools'
+  s.metadata['rubygems_mfa_required'] = 'true'
 end
