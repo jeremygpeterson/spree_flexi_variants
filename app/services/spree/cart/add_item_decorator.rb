@@ -17,7 +17,7 @@ if Spree.version.to_f > 3.7
         line_item = order.line_items.new(quantity: quantity,
                                          variant: variant,
                                          options: opts)
-        line_customization_result = update_line_item_with_customizations(line_item, options)
+        line_customization_result = update_line_item_with_customizations(line_item: line_item, currency: order.currency, options: options)
         return line_customization_result unless line_customization_result.success?
 
         line_item = line_customization_result.value
@@ -37,7 +37,7 @@ if Spree.version.to_f > 3.7
       success(order: order, line_item: line_item, line_item_created: line_item_created, options: options)
     end
 
-    def update_line_item_with_customizations(line_item, options)
+    def update_line_item_with_customizations(line_item:, currency:, options:)
       # Retrieve product customizations values from options or default to an empty array
       # Set product customizations for the line item and associate each with the line item
       product_customizations_values = options[:product_customizations] || []
@@ -60,7 +60,7 @@ if Spree.version.to_f > 3.7
       line_item.currency = currency if currency
 
       # Set the total price for the line item, considering the base variant price and offset
-      result = calculate_total_price(line_item, offset_price)
+      result = calculate_total_price(line_item, currency, offset_price)
       return result unless result.success?
 
       line_item.price = result.value
@@ -90,8 +90,8 @@ if Spree.version.to_f > 3.7
         product_customizations_values.sum { |product_customization| product_customization.price(variant) }.to_f
     end
 
-    def calculate_total_price(_line_item, offset_price)
-      total_price = currency ? variant.price_in(currency).amount + offset_price : variant.price + offset_price
+    def calculate_total_price(line_item, currency, offset_price)
+      total_price = currency ? line_item.variant.price_in(currency).amount + offset_price : line_item.variant.price + offset_price
       success(total_price)
     rescue StandardError => e
       failure(nil, "Error calculating total price: #{e.message}")
