@@ -20,14 +20,13 @@
           </li>
         <% end %>
       </ul>
+      <%= render 'line_item_data', view: 'mobile', line_item: line_item, item_form: item_form %>
 
       <%# Start: Spree Flexi Variant %>
 
-      <%= render 'spree/orders/cart_item_description' %>
+      <%= render partial: 'spree/orders/cart_item_description' %>
 
       <%# End: Spree Flexi Variant %>
-
-      <%= render 'line_item_data', view: 'mobile', line_item: line_item, item_form: item_form %>
     </div>
     <%= render 'line_item_data', view: 'desktop', line_item: line_item, item_form: item_form %>
   </div>
