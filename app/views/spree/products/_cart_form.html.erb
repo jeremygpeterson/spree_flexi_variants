@@ -30,8 +30,6 @@
 
     <%= render 'customizations' %>
 
-    <%= render 'ad_hoc_option_types' %>
-
     <%# End: Spree Flexi Variant %>
 
     <% if is_product_available_in_currency %>
@@ -44,6 +42,13 @@
         </span>
         <span content="<%= current_currency %>"></span>
       </div>
+
+      <%# Start: Spree Flexi Variant %>
+
+      <%= render partial: 'spree/products/ad_hoc_option_types' %>
+
+      <%# End: Spree Flexi Variant %>
+
     <% end %>
 
     <%# Start: Spree Flexi Variant %>
