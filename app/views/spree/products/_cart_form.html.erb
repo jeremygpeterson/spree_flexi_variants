@@ -26,6 +26,13 @@
   } do |f| %>
   <div id="inside-product-cart-form" data-hook="inside_product_cart_form">
     <% if is_product_available_in_currency %>
+      <%# Start: Spree Flexi Variant %>
+
+      <%= render partial: 'spree/products/customizations' %>
+
+      <%= render partial: 'spree/products/ad_hoc_option_types' %>
+
+      <%# End: Spree Flexi Variant %>
       <div id="product-price" class="mb-2 text-center text-md-left add-to-cart-form-price" data-hook="product_price">
         <% if should_display_compare_at_price?(default_variant) %>
           <span class="compare-at-price mr-3"><%= display_compare_at_price(default_variant) %></span>
@@ -35,17 +42,11 @@
         </span>
         <span content="<%= current_currency %>"></span>
       </div>
-
       <%# Start: Spree Flexi Variant %>
-
-      <%= render partial: 'spree/products/customizations' %>
-
-      <%= render partial: 'spree/products/ad_hoc_option_types' %>
 
       <%= render partial: 'spree/products/pricing' %>
 
       <%# End: Spree Flexi Variant %>
-
     <% end %>
     <div class="text-center text-md-left add-to-cart-form-general-availability text-uppercase">
       <%= Spree.t(:availability) %>:
