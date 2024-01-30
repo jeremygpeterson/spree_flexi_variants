@@ -89,7 +89,7 @@ if Spree.version.to_f > 3.7
     end
 
     def retrieve_ad_hoc_option_values(ad_hoc_option_value_ids)
-      ad_hoc_option_values = AdHocOptionValue.where(id: ad_hoc_option_value_ids.reject(&:blank?))
+      ad_hoc_option_values = Spree::AdHocOptionValue.where(id: ad_hoc_option_value_ids.reject(&:blank?))
       success(ad_hoc_option_values)
     rescue StandardError => e
       message = if Rails.env.development?
