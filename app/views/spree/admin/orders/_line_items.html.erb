@@ -26,14 +26,12 @@
                 <%= link_to item.name, edit_admin_product_path(item.variant.product) %>
                 <br>
                 <%= "(#{item.options_text})" if item.options_text.present? %>
+                <%# Start: Spree Flexi Variant %>
+
+                <%= render partial: 'spree/shared/additional_line_item_fields', locals: {item: item} %>
+
+                <%# End: Spree Flexi Variant %>
               </td>
-
-              <%# Start: Spree Flexi Variant %>
-
-              <%= render partial: 'spree/shared/additional_line_item_fields', locals: {item: item} %>
-
-              <%# End: Spree Flexi Variant %>
-
               <td class="line-item-price text-center"><%= item.single_money.to_html %></td>
               <td class="line-item-qty-show text-center" style="width:120px;">
                 <%= item.quantity %>
