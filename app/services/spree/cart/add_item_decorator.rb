@@ -3,6 +3,7 @@ if Spree.version.to_f > 3.7
     private
 
     def add_to_line_item(order:, variant:, quantity: nil, public_metadata: {}, private_metadata: {}, options: {})
+      # raise StandardError, options
       options ||= {}
       quantity ||= 1
 
@@ -41,6 +42,7 @@ if Spree.version.to_f > 3.7
       # Retrieve product customizations values from options or default to an empty array
       # Set product customizations for the line item and associate each with the line item
       product_customizations_values = options[:product_customizations] || []
+      raise StandardError, product_customizations_values
       result = set_product_customizations!(line_item, product_customizations_values)
       return result unless result.success?
 
