@@ -19,6 +19,6 @@
   <%= link_to_with_icon  'list-alt',
     Spree.t(:product_customization_types),
     spree.selected_admin_product_product_customization_types_url(@product),
-    class: "nav-link #{'active' if current == :ad_hoc_variant_exclusions}" %>
+    class: "nav-link #{'active' if current == :product_customization_types}" %>
 
 <% end if can?(:admin, Spree::Product) %>
