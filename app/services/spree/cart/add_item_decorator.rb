@@ -73,16 +73,31 @@ if Spree.version.to_f > 3.7
       saved_product_customizations_values = product_customizations_values.map(&:save)
       success(saved_product_customizations_values)
     rescue ActiveRecord::RecordInvalid => e
-      failure(nil, "Validation failed when saving product customizations: #{e.message}")
+      message = if Rails.env.development?
+                  "Validation failed when saving product customizations: #{e.message}"
+                else
+                  'Validation failed when saving product customizations'
+                end
+      failure(nil, message)
     rescue StandardError => e
-      failure(nil, "Failed to set product customizations: #{e.message}")
+      message = if Rails.env.development?
+                  "Failed to set product customizations: #{e.message}"
+                else
+                  'Failed to set product customizations'
+                end
+      failure(nil, message)
     end
 
     def retrieve_ad_hoc_option_values(ad_hoc_option_value_ids)
       ad_hoc_option_values = AdHocOptionValue.where(id: ad_hoc_option_value_ids.reject(&:blank?))
       success(ad_hoc_option_values)
     rescue StandardError => e
-      failure(nil, "Error retrieving ad-hoc option values: #{e.message}")
+      message = if Rails.env.development?
+                  "Error retrieving ad-hoc option values: #{e.message}"
+                else
+                  'Error retrieving ad-hoc option values'
+                end
+      failure(nil, message)
     end
 
     def calculate_offset_price(ad_hoc_option_values, product_customizations_values)
@@ -94,7 +109,12 @@ if Spree.version.to_f > 3.7
       total_price = currency ? line_item.variant.price_in(currency).amount + offset_price : line_item.variant.price + offset_price
       success(total_price)
     rescue StandardError => e
-      failure(nil, "Error calculating total price: #{e.message}")
+      message = if Rails.env.development?
+                  "Error calculating total price: #{e.message}"
+                else
+                  'Error calculating total price'
+                end
+      failure(nil, message)
     end
   end
 
