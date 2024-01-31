@@ -3,7 +3,6 @@ if Spree.version.to_f > 3.7
     private
 
     def add_to_line_item(order:, variant:, quantity: nil, public_metadata: {}, private_metadata: {}, options: {})
-      # raise StandardError, options
       options ||= {}
       quantity ||= 1
 
