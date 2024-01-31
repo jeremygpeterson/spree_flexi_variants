@@ -22,6 +22,7 @@ if Spree.version.to_f > 3.7
         return product_customizations_result unless product_customizations_result.success?
 
         options[:product_customizations] = product_customizations_result.value
+        options[:ad_hoc_option_values] = SpreeFlexiVariants::AdHocOptionValues::FindByLineItem.new.execute(line_item: line_item, options: options)
         line_customization_result = update_line_item_with_customizations(line_item: line_item, currency: order.currency, options: options)
         return line_customization_result unless line_customization_result.success?
 
@@ -71,14 +72,8 @@ if Spree.version.to_f > 3.7
 
     def update_line_item_with_customizations(line_item:, currency:, options:)
       product_customizations_values = options[:product_customizations] || []
+      ad_hoc_option_values = options[:ad_hoc_option_values] || []
 
-      # Retrieve ad-hoc option values from options or default to an empty array
-      # Retrieve ad-hoc option values based on the provided ids and assign them to the line item
-      ad_hoc_option_value_ids = options[:ad_hoc_option_values] || []
-      result = retrieve_ad_hoc_option_values(ad_hoc_option_value_ids)
-      return result unless result.success?
-
-      ad_hoc_option_values = result.value
       line_item.ad_hoc_option_values = ad_hoc_option_values
 
       # Calculate the offset price based on ad-hoc option values and product customizations
@@ -94,18 +89,6 @@ if Spree.version.to_f > 3.7
       line_item.price = result.value
 
       success(line_item)
-    end
-
-    def retrieve_ad_hoc_option_values(ad_hoc_option_value_ids)
-      ad_hoc_option_values = Spree::AdHocOptionValue.where(id: ad_hoc_option_value_ids.reject(&:blank?))
-      success(ad_hoc_option_values)
-    rescue StandardError => e
-      message = if Rails.env.development?
-                  "Error retrieving ad-hoc option values: #{e.message}"
-                else
-                  'Error retrieving ad-hoc option values'
-                end
-      failure(nil, message)
     end
 
     def calculate_offset_price(line_item, ad_hoc_option_values, product_customizations_values)
