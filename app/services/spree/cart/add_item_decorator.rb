@@ -82,7 +82,7 @@ if Spree.version.to_f > 3.7
       line_item.ad_hoc_option_values = ad_hoc_option_values
 
       # Calculate the offset price based on ad-hoc option values and product customizations
-      offset_price = calculate_offset_price(ad_hoc_option_values, product_customizations_values)
+      offset_price = calculate_offset_price(line_item, ad_hoc_option_values, product_customizations_values)
 
       # Set the currency for the line item if specified
       line_item.currency = currency if currency
@@ -108,9 +108,9 @@ if Spree.version.to_f > 3.7
       failure(nil, message)
     end
 
-    def calculate_offset_price(ad_hoc_option_values, product_customizations_values)
+    def calculate_offset_price(line_item, ad_hoc_option_values, product_customizations_values)
       ad_hoc_option_values.sum(:price_modifier).to_f +
-        product_customizations_values.sum { |product_customization| product_customization.price(variant) }.to_f
+        product_customizations_values.sum { |product_customization| product_customization.price(line_item.variant) }.to_f
     end
 
     def calculate_total_price(line_item, currency, offset_price)
