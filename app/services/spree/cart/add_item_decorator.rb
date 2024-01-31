@@ -17,6 +17,11 @@ if Spree.version.to_f > 3.7
         line_item = order.line_items.new(quantity: quantity,
                                          variant: variant,
                                          options: opts)
+        options[:product_customizations] ||= []
+        product_customizations_result = create_product_customizations(line_item: line_item, options: options)
+        return product_customizations_result unless product_customizations_result.success?
+
+        options[:product_customizations] = product_customizations_result.value
         line_customization_result = update_line_item_with_customizations(line_item: line_item, currency: order.currency, options: options)
         return line_customization_result unless line_customization_result.success?
 
@@ -37,13 +42,35 @@ if Spree.version.to_f > 3.7
       success(order: order, line_item: line_item, line_item_created: line_item_created, options: options)
     end
 
+    def create_product_customizations(line_item:, options:)
+      options[:product_customizations] ||= []
+      product_customization_type_id_to_customized_product_options_attributes = options[:product_customizations].each_with_object({}) do |product_customization, result|
+        result[product_customization[:product_customization_type_id]] = product_customization[:customized_product_options_attributes]
+      end
+      product_customization_type_ids = options[:product_customizations].pluck(:product_customization_type_id)
+      product_customization_types = Spree::ProductCustomizationType.where(id: product_customization_type_ids)
+      product_customizations = product_customization_types.map do |product_customization_type|
+        result = Spree::SpreeFlexiVariants::ProductCustomizations::Create.call(
+          line_item: line_item,
+          product_customization_type: product_customization_type,
+          customized_product_options_attributes: product_customization_type_id_to_customized_product_options_attributes[product_customization_type.id.to_s]
+        )
+        return result unless result.success?
+
+        result.value
+      end
+      success(product_customizations)
+    rescue StandardError => e
+      message = if Rails.env.development?
+                  "Error creating product customizations: #{e.message}"
+                else
+                  'Error creating product customizations'
+                end
+      failure(nil, message)
+    end
+
     def update_line_item_with_customizations(line_item:, currency:, options:)
-      # Retrieve product customizations values from options or default to an empty array
-      # Set product customizations for the line item and associate each with the line item
       product_customizations_values = options[:product_customizations] || []
-      raise StandardError, product_customizations_values
-      result = set_product_customizations!(line_item, product_customizations_values)
-      return result unless result.success?
 
       # Retrieve ad-hoc option values from options or default to an empty array
       # Retrieve ad-hoc option values based on the provided ids and assign them to the line item
@@ -67,26 +94,6 @@ if Spree.version.to_f > 3.7
       line_item.price = result.value
 
       success(line_item)
-    end
-
-    def set_product_customizations!(line_item, product_customizations_values)
-      product_customizations_values.each { |product_customization| line_item.product_customizations << product_customization }
-      saved_product_customizations_values = product_customizations_values.map(&:save)
-      success(saved_product_customizations_values)
-    rescue ActiveRecord::RecordInvalid => e
-      message = if Rails.env.development?
-                  "Validation failed when saving product customizations: #{e.message}"
-                else
-                  'Validation failed when saving product customizations'
-                end
-      failure(nil, message)
-    rescue StandardError => e
-      message = if Rails.env.development?
-                  "Failed to set product customizations: #{e.message}"
-                else
-                  'Failed to set product customizations'
-                end
-      failure(nil, message)
     end
 
     def retrieve_ad_hoc_option_values(ad_hoc_option_value_ids)
