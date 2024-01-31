@@ -51,3 +51,14 @@ en:
     reset: "Reset"
     position_within_product: "Display order relative to other Ad Hoc Options (low numbers are displayed first)"
     selected_by_default: "Selected by default?"
+  activerecord:
+    errors:
+      models:
+        spree/product_customization:
+          attributes:
+            product_customization_type:
+              invalid_product_customization_type: product customization type is invalid for this product
+        spree/customized_product_option:
+          attributes:
+            customizable_product_option:
+              invalid_customizable_product_option: customizable product option is invalid for this product
