@@ -3,6 +3,7 @@ module Spree
   class AdHocOptionValue < ActiveRecord::Base
     belongs_to :ad_hoc_option_type
     belongs_to :option_value
+    has_many :products, through: :ad_hoc_option_type
     has_many :excluded_ad_hoc_option_values, dependent: :destroy
 
     # currently no controller for normal users present
