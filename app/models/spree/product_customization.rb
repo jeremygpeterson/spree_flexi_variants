@@ -6,13 +6,10 @@ module Spree
     # attr_accessible :product_customization_type_id, :line_item_id
     # TODO: Jeff, add 'required'
 
+    delegate :calculator, to: :product_customization_type
     # price might depend on something contained in the variant (like product property value)a
     def price(variant = nil)
       amount = product_customization_type.calculator.compute(self, variant)
-    end
-
-    def calculator
-      product_customization_type.calculator
     end
   end
 end
