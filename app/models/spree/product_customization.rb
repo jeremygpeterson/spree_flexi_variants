@@ -7,6 +7,7 @@ module Spree
     # TODO: Jeff, add 'required'
 
     delegate :calculator, to: :product_customization_type
+    accepts_nested_attributes_for :customized_product_options
     validates :customized_product_options, presence: true
     validate :product_customization_type_must_belongs_to_same_product_as_line_item
 
