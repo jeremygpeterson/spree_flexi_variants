@@ -51,7 +51,7 @@ if Spree.version.to_f > 3.7
       product_customization_type_ids = options[:product_customizations].pluck(:product_customization_type_id)
       product_customization_types = Spree::ProductCustomizationType.where(id: product_customization_type_ids)
       product_customizations = product_customization_types.map do |product_customization_type|
-        result = Spree::SpreeFlexiVariants::ProductCustomizations::Create.call(
+        result = SpreeFlexiVariants::ProductCustomizations::Create.call(
           line_item: line_item,
           product_customization_type: product_customization_type,
           customized_product_options_attributes: product_customization_type_id_to_customized_product_options_attributes[product_customization_type.id.to_s]
