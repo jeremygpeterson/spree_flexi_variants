@@ -8,7 +8,7 @@ This is a [spree](http://spreecommerce.com) extension that solves two use cases 
 
 Use these when have numerous (possibly price-altering) product options and you don't want to create variants for each combination.
 
-You can also restrict certain combinations of options from coexisting.  These are called **Ad Hoc Exclusions**.
+You can also restrict certain combinations of options from coexisting. These are called **Ad Hoc Exclusions**.
 
 ### Product Customizations
 
@@ -36,17 +36,52 @@ Working with a older spree? Check out the original gem or one of the many forks.
 
 `bundle exec rails g spree_flexi_variants:install`
 
+## API usage
+
+### Payload
+
+To add products with customizations, use the following api: `/api/v2/storefront/cart/add_item`
+
+To add customizations, add the following to the options payload.
+
+```json
+{
+  "variant_id": "<string>",
+  "quantity": "<integer>",
+  "public_metadata": {},
+  "private_metadata": {},
+  "options": {
+    "product_customizations": [
+      {
+        "product_customization_type_id": "<string>",
+        "customized_product_options_attributes": [
+          {
+            "customizable_product_option_id": "<string>",
+            "value": "<string>"
+          }
+        ]
+      }
+    ],
+    "ad_hoc_option_value_ids": ["<string|integer>"]
+  }
+}
+```
+
+### Possible Errors
+
+Note that the Product Customization Type and Customizable Product Option Ids must have already been associated with the product, otherwise the line item will be created without them.
+
 ## Examples
 
 Build a 'Cake' product using **Ad Hoc Options** and **Product Customizations**
 
 ![Cake](https://raw.github.com/QuintinAdam/spree_flexi_variants/master/doc/custom_cake.png)
 
-Build a 'Necklace'  product using **Ad Hoc Options** and **Product Customizations**
+Build a 'Necklace' product using **Ad Hoc Options** and **Product Customizations**
 
 ![Necklace](https://raw.github.com/jsqu99/spree_flexi_variants/master/doc/necklace_screenshot.png)
 
-Build a 'Pizza' product using **Ad Hoc Options**. Note that the 'multi' option checkboxes come from a partial named after the option name (see app/views/products/ad_hoc_options/_toppings.html.erb)
+Build a 'Pizza' product using **Ad Hoc Options**. Note that the 'multi' option checkboxes come from a partial named after the option name (see app/views/products/ad_hoc_options/\_toppings.html.erb)
 
 ![Picture Frame](https://raw.github.com/jsqu99/spree_flexi_variants/master/doc/pizza_screenshot.png)
 
