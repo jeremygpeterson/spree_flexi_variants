@@ -30,7 +30,7 @@ Working with a older spree? Check out the original gem or one of the many forks.
 
 ### See the notes in Versionfile if you are using an older version of spree
 
-`gem 'spree_flexi_variants', github: 'collins-lagat/spree_flexi_variants'`
+`gem 'spree_flexi_variants', github: 'collins-lagat/spree_flexi_variants', tag: 'v4.6.2.1'`
 
 `bundle install`
 
@@ -70,6 +70,18 @@ To add customizations, add the following to the options payload.
 ### Possible Errors
 
 Note that the Product Customization Type and Customizable Product Option Ids must have already been associated with the product, otherwise the line item will be created without them.
+
+### Fetching Ad Hoc Option Types and Product Customization Types
+To fetch _ad hoc option types_ and _product customization types_ using `/api/v2/storefront/products/{{PRODUCT_SLUG}}`, included them in the `includes` query params i.e.
+
+```requests
+GET /api/v2/storefront/products/army-green-jacket
+Content-Type: application/json
+
+{
+  "includes": product_customization_types.customizable_product_options,ad_hoc_option_types.ad_hoc_option_values
+}
+```
 
 ## Examples
 
