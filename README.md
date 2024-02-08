@@ -80,7 +80,7 @@ GET /api/v2/storefront/products/army-green-jacket
 Content-Type: application/json
 
 {
-  "includes": product_customization_types.customizable_product_options,ad_hoc_option_types.ad_hoc_option_values
+  "includes": "product_customization_types.customizable_product_options,ad_hoc_option_types.ad_hoc_option_values"
 }
 ```
 
