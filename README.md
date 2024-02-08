@@ -75,7 +75,7 @@ Note that the Product Customization Type and Customizable Product Option Ids mus
 ### Fetching Ad Hoc Option Types and Product Customization Types
 To fetch _ad hoc option types_ and _product customization types_ using `/api/v2/storefront/products/{{PRODUCT_SLUG}}`, included them in the `includes` query params i.e.
 
-```requests
+```http
 GET /api/v2/storefront/products/army-green-jacket
 Content-Type: application/json
 
