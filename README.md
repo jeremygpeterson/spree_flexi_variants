@@ -50,7 +50,8 @@ To add customizations, add the following to the options payload.
   "quantity": "<integer>",
   "public_metadata": {},
   "private_metadata": {},
-  "options": {
+  "options": {},
+  "customization_options": {
     "product_customizations": [
       {
         "product_customization_type_id": "<string>",
