@@ -9,7 +9,7 @@ module Spree
 
             options = add_item_params[:options] || {}
             customization_options = add_item_params[:customization_options]
-            options[:product_customizations] = customization_options[:product_customizations] || []
+            options[:product_customizations_attributes] = customization_options[:product_customizations_attributes] || []
             options[:ad_hoc_option_value_ids] = customization_options[:ad_hoc_option_value_ids] || []
 
             result = add_item_service.call(
@@ -27,7 +27,8 @@ module Spree
           private
 
           def add_item_params
-            params.permit(:quantity, :variant_id, public_metadata: {}, private_metadata: {}, options: {}, customization_options: {})
+            params.permit(:quantity, :variant_id, public_metadata: {}, private_metadata: {}, options: {},
+                                                  customization_options: {}).with_defaults(customization_options: {})
           end
         end
       end

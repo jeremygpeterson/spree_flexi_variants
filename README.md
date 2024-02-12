@@ -52,7 +52,7 @@ To add customizations, add the following to the options payload.
   "private_metadata": {},
   "options": {},
   "customization_options": {
-    "product_customizations": [
+    "product_customizations_attributes": [
       {
         "product_customization_type_id": "<string>",
         "customized_product_options_attributes": [
