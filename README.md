@@ -30,7 +30,7 @@ Working with a older spree? Check out the original gem or one of the many forks.
 
 ### See the notes in Versionfile if you are using an older version of spree
 
-`gem 'spree_flexi_variants', github: 'collins-lagat/spree_flexi_variants', tag: 'v4.6.2.3'`
+`gem 'spree_flexi_variants', github: 'collins-lagat/spree_flexi_variants', tag: 'v4.6.2.4'`
 
 `bundle install`
 
