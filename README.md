@@ -22,13 +22,28 @@ Working with an even older Spree version? Check out [the original gem by Jeff Sq
 
 ## Installation
 
-### See the notes in Versionfile if you are using an older version of spree
+1. Add this extension to your Gemfile with this line:
 
-`gem 'spree_flexi_variants', github: 'collins-lagat/spree_flexi_variants', tag: 'v4.6.2.5'`
+   ```ruby
+   gem 'spree_flexi_variants', github: 'collins-lagat/spree_flexi_variants', tag: 'v4.6.2.5'
+   ```
 
-`bundle install`
+2. Install the gem using Bundler
 
-`bundle exec rails g spree_flexi_variants:install`
+   ```ruby
+   bundle install
+   ```
+
+3. Copy & run migrations
+
+   ```ruby
+   bundle exec rails g spree_flexi_variants:install
+   ```
+
+4. Restart your server
+
+If your server was running, restart it so that it can find the assets properly.
+
 
 ## API Usage
 
