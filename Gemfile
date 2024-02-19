@@ -10,6 +10,7 @@ gem 'spree', github: 'spree/spree', tag: 'v4.6.2'
 gem 'spree_backend', github: 'spree/spree_backend', tag: 'v4.6.2'
 
 group :test do
+  gem 'factory_girl_rails'
   gem 'pg'
   gem 'rails-controller-testing'
 end
