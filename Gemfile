@@ -9,7 +9,7 @@ gem 'rails', '~> 7.0.0'
 gem 'spree', github: 'spree/spree', tag: 'v4.6.2'
 gem 'spree_backend', github: 'spree/spree_backend', tag: 'v4.6.2'
 
-group :test do
+group :development, :test do
   gem 'factory_bot_rails'
   gem 'pg'
   gem 'rails-controller-testing'
