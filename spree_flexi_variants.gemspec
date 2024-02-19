@@ -48,6 +48,9 @@ Gem::Specification.new do |s|
   s.add_dependency 'spree_backend', spree_version, '< 4.7'
   s.add_dependency 'spree_extension'
 
+
+  s.add_development_dependency 'pg'
   s.add_development_dependency 'spree_dev_tools'
+
   s.metadata['rubygems_mfa_required'] = 'true'
 end
