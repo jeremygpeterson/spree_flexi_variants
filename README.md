@@ -45,7 +45,7 @@ Working with an even older Spree version? Check out [the original gem by Jeff Sq
 If your server was running, restart it so that it can find the assets properly.
 
 
-## API Usage
+## Usage
 
 ### Adding Products To Cart With Customizations and Ad Hoc Options
 Adding products with customizations and ad hoc options is similar to adding products without them. The only difference is that you need to include the customization and ad hoc options in the payload.
@@ -81,8 +81,7 @@ X-Spree-Order-Token: <string>
 > Note that the Product Customization Type and Customizable Product Option Ids must have already been associated with the product, otherwise the line item will be created without them.
 
 ### Fetching Ad Hoc Option Types and Product Customization Types
-To fetch _ad hoc option types_ and _product customization types_ using `/api/v2/storefront/products/{{PRODUCT_SLUG}}`, included them in the `includes` query params i.e.
-
+In order to build a form for the user to select customizations and ad hoc options, you need to fetch the available customization and ad hoc option types. In order to do this, you'll need to fetch the product using the storefront API and include the customization and ad hoc option types in the `includes` query params field.
 ```http
 GET /api/v2/storefront/products/army-green-jacket
 Content-Type: application/json
