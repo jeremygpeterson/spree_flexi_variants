@@ -1,7 +1,5 @@
 # SpreeFlexiVariants
 
-Master branch for Spree 3.3.0+ Read version notes for details.
-
 This is a [spree](http://spreecommerce.com) extension that solves two use cases related to variants. I call them **Ad Hoc Options** and **Product Customizations**.
 
 ### Ad Hoc Options
@@ -16,35 +14,32 @@ Use these when you want the ability to provide a highly customized product e.g. 
 
 ## Version Notes
 
-The branch spree-3-3 version for spree 3.3.0
+This gem works with Spree `4.x` up to version `4.6.x`. It will **not** work with Spree `4.7.x` and above. Pick the latest tag i.e. `v4.6.2.x` for the latest version.
 
-The branch spree-3-2 version for spree 3.2.0
+Working with Spree 3.0 to 3.3? Check out [Quintin Adam's fork](https://github.com/QuintinAdam/spree_flexi_variants).
 
-The branch spree-3-1-stable version for spree 3.1.0
-
-The branch spree-3-0-stable is an somewhat stable version for spree 3.0.0 with updated styles to match.
-
-Working with a older spree? Check out the original gem or one of the many forks. https://github.com/jsqu99/spree_flexi_variants
+Working with an even older Spree version? Check out [the original gem by Jeff Squires](https://github.com/jsqu99/spree_flexi_variants).
 
 ## Installation
 
 ### See the notes in Versionfile if you are using an older version of spree
 
-`gem 'spree_flexi_variants', github: 'collins-lagat/spree_flexi_variants', tag: 'v4.6.2.4'`
+`gem 'spree_flexi_variants', github: 'collins-lagat/spree_flexi_variants', tag: 'v4.6.2.5'`
 
 `bundle install`
 
 `bundle exec rails g spree_flexi_variants:install`
 
-## API usage
+## API Usage
 
-### Payload
+### Adding Products To Cart With Customizations and Ad Hoc Options
+Adding products with customizations and ad hoc options is similar to adding products without them. The only difference is that you need to include the customization and ad hoc options in the payload.
 
-To add products with customizations, use the following api: `/api/v2/storefront/cart/add_item`
+```http
+POST /api/v2/storefront/cart/add_item
+Content-Type: application/json
+X-Spree-Order-Token: <string>
 
-To add customizations, add the following to the options payload.
-
-```json
 {
   "variant_id": "<string>",
   "quantity": "<integer>",
@@ -67,10 +62,7 @@ To add customizations, add the following to the options payload.
   }
 }
 ```
-
-### Possible Errors
-
-Note that the Product Customization Type and Customizable Product Option Ids must have already been associated with the product, otherwise the line item will be created without them.
+**Caution**: Note that the Product Customization Type and Customizable Product Option Ids must have already been associated with the product, otherwise the line item will be created without them.
 
 ### Fetching Ad Hoc Option Types and Product Customization Types
 To fetch _ad hoc option types_ and _product customization types_ using `/api/v2/storefront/products/{{PRODUCT_SLUG}}`, included them in the `includes` query params i.e.
@@ -83,6 +75,11 @@ Content-Type: application/json
   "includes": "product_customization_types.customizable_product_options,ad_hoc_option_types.ad_hoc_option_values"
 }
 ```
+# Known Limitations
+
+- Doesn't support spree 4.7.x and above
+- Products with different customizations and ad hoc options can't be added to the same cart at the same time. Attempting to add a product with different customizations and ad hoc options to the same cart will only increase the quantity of the first product.
+- Support for `spree_frontend` was removed in version.
 
 # Documentation
 
