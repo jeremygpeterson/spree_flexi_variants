@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
   spree_version = '>= 4.4.0'
   s.add_dependency('carrierwave')
   s.add_dependency('mini_magick')
-  s.add_dependency 'spree', spree_version
 
   s.add_development_dependency 'capybara',           '~> 2.1'
   s.add_development_dependency 'coffee-rails'
@@ -45,6 +44,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'xray-rails'
   s.add_development_dependency 'quiet_assets'
   s.add_development_dependency 'jazz_fingers'
+  s.add_dependency 'spree', spree_version, '< 4.7'
   s.add_dependency 'spree_backend', spree_version, '< 4.7'
   s.add_dependency 'spree_extension'
 
