@@ -13,6 +13,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'pg'
   gem 'rails-controller-testing'
+  gem 'spree_dev_tools'
 end
 
 gemspec
