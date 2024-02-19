@@ -90,7 +90,7 @@ Content-Type: application/json
   "includes": "product_customization_types.customizable_product_options,ad_hoc_option_types.ad_hoc_option_values"
 }
 ```
-## Known Limitations
+## Limitations
 
 - Doesn't support spree 4.7.x and above
 - Products with different customizations and ad hoc options can't be added to the same cart at the same time. Attempting to add a product with different customizations and ad hoc options to the same cart will only increase the quantity of the first product.
