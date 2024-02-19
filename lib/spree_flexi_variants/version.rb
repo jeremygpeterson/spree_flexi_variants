@@ -1,5 +1,5 @@
 module SpreeFlexiVariants
-  VERSION = '4.6.2.4'.freeze
+  VERSION = '4.6.2.5'.freeze
 
   module_function
 
