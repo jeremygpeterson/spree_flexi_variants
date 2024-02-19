@@ -6,8 +6,11 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 7.0.0'
-gem 'rails-controller-testing'
 gem 'spree', github: 'spree/spree', tag: 'v4.6.2'
 gem 'spree_backend', github: 'spree/spree_backend', tag: 'v4.6.2'
+
+group :test do
+  gem 'rails-controller-testing'
+end
 
 gemspec
