@@ -77,7 +77,8 @@ X-Spree-Order-Token: <string>
   }
 }
 ```
-**Caution**: Note that the Product Customization Type and Customizable Product Option Ids must have already been associated with the product, otherwise the line item will be created without them.
+> [!CAUTION]
+> Note that the Product Customization Type and Customizable Product Option Ids must have already been associated with the product, otherwise the line item will be created without them.
 
 ### Fetching Ad Hoc Option Types and Product Customization Types
 To fetch _ad hoc option types_ and _product customization types_ using `/api/v2/storefront/products/{{PRODUCT_SLUG}}`, included them in the `includes` query params i.e.
