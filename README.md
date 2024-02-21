@@ -90,6 +90,60 @@ Content-Type: application/json
   "includes": "product_customization_types.customizable_product_options,ad_hoc_option_types.ad_hoc_option_values"
 }
 ```
+
+### Getting Ad Hoc Option and Product Customization Presentation Texts
+Whenever you include line items when retrieving the cart, each line item includes a field called `option_text` which contains the presentation texts for regular option types and values. This extension adds two more fields `product_customization_text` and `ad_hoc_option_text` which contain the presentation texts for the product customizations and ad hoc options respectively.
+
+```http
+GET /api/v2/storefront/cart
+Content-Type: application/json
+X-Spree-Order-Token: <string>
+
+{
+  "data": {
+    "id": "11",
+    "type": "cart",
+    "attributes": {
+      "number": "R823511564",
+      "rest_of_attributes": "..."
+    },
+    "relationships": {
+      "line_items": {
+        "data": [
+          {
+            "id": "6",
+            "type": "line_item"
+          }
+        ]
+      },
+      "rest_of_relationships": "..."
+    },
+    includes: [
+      {
+        "id": "6",
+        "type": "line_item",
+        "attributes": {
+          "name": "3 4 Sleeve T Shirt",
+          "options_text": "Color: white, Size: XS",
+          "ad_hoc_option_text": "Length: Maxi",
+          "product_customization_text": "Badges($2.00): (How many?: 2)",
+          "rest_of_attributes": "..."
+        },
+        "relationships": {
+          "variant": {
+            "data": {
+              "id": "130",
+              "type": "variant"
+            }
+          },
+          "rest_of_relationships": "..."
+        }
+      }
+    ]
+  }
+}
+```
+
 ## Limitations
 
 - Doesn't support spree 4.7.x and above
