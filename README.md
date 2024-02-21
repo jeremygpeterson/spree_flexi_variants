@@ -14,7 +14,7 @@ Use these when you want the ability to provide a highly customized product e.g. 
 
 ## Version Notes
 
-This gem works with Spree `4.x` up to version `4.6.x`. It will **not** work with Spree `4.7.x` and above. Pick the latest tag i.e. `v4.6.2.x` for the latest version.
+This gem works with Spree `4.x` up to version `4.6.x`. It will **not** work with Spree `4.7.x` and above. Pick the latest tag i.e. `v4.6.x` for the latest version.
 
 Working with Spree 3.0 to 3.3? Check out [Quintin Adam's fork](https://github.com/QuintinAdam/spree_flexi_variants).
 
@@ -25,7 +25,7 @@ Working with an even older Spree version? Check out [the original gem by Jeff Sq
 1. Add this extension to your Gemfile with this line:
 
    ```ruby
-   gem 'spree_flexi_variants', github: 'collins-lagat/spree_flexi_variants', tag: 'v4.6.2.5'
+   gem 'spree_flexi_variants', github: 'collins-lagat/spree_flexi_variants', tag: 'v4.6.6'
    ```
 
 2. Install the gem using Bundler
