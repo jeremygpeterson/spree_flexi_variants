@@ -118,7 +118,7 @@ X-Spree-Order-Token: <string>
       },
       "rest_of_relationships": "..."
     },
-    includes: [
+    "includes": [
       {
         "id": "6",
         "type": "line_item",
