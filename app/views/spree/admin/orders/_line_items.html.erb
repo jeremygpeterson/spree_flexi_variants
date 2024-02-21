@@ -25,10 +25,17 @@
               <td class="line-item-name text-center">
                 <%= link_to item.name, edit_admin_product_path(item.variant.product) %>
                 <br>
-                <%= "(#{item.options_text})" if item.options_text.present? %>
+                <%= "(#{item.options_text})" if item.options_text.present? %> 
                 <%# Start: Spree Flexi Variant %>
 
-                <%= render partial: 'spree/shared/additional_line_item_fields', locals: {item: item} %>
+                <% if item.ad_hoc_option_text.present? %>
+                  <br>
+                  <%= "(#{item.ad_hoc_option_text})" %>
+                <% end %>
+                <% if item.product_customization_text.present? %>
+                  <br>
+                  <%= "#{item.product_customization_text}" %>
+                <% end %>
 
                 <%# End: Spree Flexi Variant %>
               </td>

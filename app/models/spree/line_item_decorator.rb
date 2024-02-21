@@ -10,32 +10,12 @@ module Spree
       base.after_create :update_price_from_customizations_and_options!
     end
 
-    def options_text
-      str = []
-      unless ad_hoc_option_values.empty?
+    def ad_hoc_option_text
+      @ad_hoc_option_text ||= Spree::LineItems::AdHocOptionsPresenter.new(self).to_sentence
+    end
 
-        # TODO: group multi-select options (e.g. toppings)
-        str << ad_hoc_option_values.each do |pov|
-        end.join(',')
-      end # unless empty?
-
-      unless product_customizations.empty?
-        product_customizations.each do |customization|
-          price_adjustment = customization.price == 0 ? '' : " (#{Spree::Money.new(customization.price)})"
-          str << "#{customization.product_customization_type.presentation}#{price_adjustment}"
-          customization.customized_product_options.each do |option|
-            next if option.empty?
-
-            str << if option.customization_image?
-                     "#{option.customizable_product_option.presentation} = #{File.basename option.customization_image.url}"
-                   else
-                     "#{option.customizable_product_option.presentation} = #{option.value}"
-                   end
-          end # each option
-        end # each customization
-      end # unless empty?
-
-      str.join('\n')
+    def product_customization_text
+      @product_customization_text ||= Spree::LineItems::ProductCustomizationsPresenter.new(self).to_sentence
     end
 
     def cost_price
@@ -73,3 +53,4 @@ module Spree
 
   LineItem.prepend LineItemDecorator
 end
+
