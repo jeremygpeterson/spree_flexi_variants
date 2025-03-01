@@ -5,9 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 7.0.0'
-gem 'spree', github: 'spree/spree', tag: 'v4.6.2'
-gem 'spree_backend', github: 'spree/spree_backend', tag: 'v4.6.2'
+gem 'rails', '~> 7.2.0'
+gem 'spree', github: 'spree/spree'#, tag: 'v4.6.2'
+gem 'spree_backend', github: 'spree/spree_backend'#, tag: 'v4.6.2'
 
 group :development, :test do
   gem 'factory_bot_rails'

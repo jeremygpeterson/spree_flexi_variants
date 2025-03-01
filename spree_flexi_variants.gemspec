@@ -21,11 +21,11 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  spree_version = '>= 4.4.0'
+  # spree_version = '>= 4.4.0'
   s.add_dependency('carrierwave')
   s.add_dependency('mini_magick')
-  s.add_dependency 'spree', spree_version, '< 4.7'
-  s.add_dependency 'spree_backend', spree_version, '< 4.7'
+  s.add_dependency 'spree'#, spree_version, '< 4.8'
+  s.add_dependency 'spree_backend'#, spree_version, '< 4.8'
   s.add_dependency 'spree_extension'
 
   s.metadata['rubygems_mfa_required'] = 'true'
